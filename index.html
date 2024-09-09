@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock, Paper, Scissors Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: darkturquoise;
+    }
+    .game-container {
+      display: inline-block;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .result, .score {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-container">
+    <h1>Rock, Paper, Scissors </h1>
+    <p>Choose your move:</p>
+    <button onclick="playGame('rock')"><input type="image" src="https://variety.com/wp-content/uploads/2024/01/Dwayne-Johnson_credHuyDoan-e1705977711715.jpg?w=1000&h=667&crop=1&resize=1360%2C907" alt="Submit" width="100" height="50"></button>
+    <button onclick="playGame('paper')">Paper </button>
+    <button onclick="playGame('scissors')">Scissors </button>
+
+    <div class="result"></div>
+    <div class="score">Score: 0</div>
+  </div>
+
+  <script>
+    const choices = ['rock', 'paper', 'scissors'];
+    let points = 0;
+
+    function playGame(playerChoice) {
+      const npcChoice = choices[Math.floor(Math.random() * choices.length)];
+      let result = '';
+
+      if (playerChoice === npcChoice) {
+        result = 'Draw!';
+      } else if (playerChoice === 'rock' && npcChoice === 'paper') {
+        result = 'You chose Rock, NPC chose Paper. You lose!';
+        points -= 1;
+      } else if (playerChoice === 'rock' && npcChoice === 'scissors') {
+        result = 'You chose Rock, NPC chose Scissors. You win!';
+        points += 1;
+      } else if (playerChoice === 'paper' && npcChoice === 'rock') {
+        result = 'You chose Paper, NPC chose Rock. You win!';
+        points += 1;
+      } else if (playerChoice === 'paper' && npcChoice === 'scissors') {
+        result = 'You chose Paper, NPC chose Scissors. You lose!';
+        points -= 1;
+      } else if (playerChoice === 'scissors' && npcChoice === 'rock') {
+        result = 'You chose Scissors, NPC chose Rock. You lose!';
+        points -= 1;
+      } else if (playerChoice === 'scissors' && npcChoice === 'paper') {
+        result = 'You chose Scissors, NPC chose Paper. You win!';
+        points += 1;
+      }
+
+      document.querySelector('.result').innerText = result;
+      document.querySelector('.score').innerText = `Score: ${points}`;
+
+      // End the game if the points reach 3 or -3
+      if (points >= 3) {
+        alert('Game over! You win!');
+        resetGame();
+      } else if (points <= -3) {
+        alert('Game over! You lose!');
+        resetGame();
+      }
+    }
+
+    function resetGame() {
+      points = 0;
+      document.querySelector('.score').innerText = `Score: ${points}`;
+      document.querySelector('.result').innerText = '';
+    }
+  </script>
+
+</body>
+</html>
